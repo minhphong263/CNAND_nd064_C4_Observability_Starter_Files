@@ -17,9 +17,11 @@ RequestsInstrumentor().instrument()
 metrics = PrometheusMetrics(app)
 metrics.info("app_info", "Application info", version="1.0")
 
+JAEGER_HOST = getenv("JAEGER_HOST", "localhost")
 logging.getLogger("").handlers = []
 logging.basicConfig(format="%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
 
 def init_tracer(service):
 
@@ -28,6 +30,7 @@ def init_tracer(service):
             "sampler": {"type": "const", "param": 1},
             "logging": True,
             "reporter_batch_size": 1,
+            "local_agent": {"reporting_host": JAEGER_HOST},
         },
         service_name=service,
         validate=True,
@@ -43,9 +46,9 @@ tracer = init_tracer("backend")
 flask_tracer = FlaskTracing(tracer, True, app)
 
 app.config["MONGO_DBNAME"] = "example-mongodb"
-app.config[
-    "MONGO_URI"
-] = "mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb"
+app.config["MONGO_URI"] = (
+    "mongodb://example-mongodb-svc.default.svc.cluster.local:27017/example-mongodb"
+)
 
 mongo = PyMongo(app)
 

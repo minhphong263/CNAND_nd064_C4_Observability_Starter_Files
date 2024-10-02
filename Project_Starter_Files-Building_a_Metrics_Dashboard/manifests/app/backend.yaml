@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: adhika28/backend-app:v1
+          image: mmsaad85/udacity-observability-backend:1.0.15 
           imagePullPolicy: Always
           env:
             - name: JAEGER_HOST

@@ -2,6 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: backendport
 spec:
   replicas: 3
   selector:
@@ -26,6 +31,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
+  labels:
+    app: backend
 spec:
   selector:
     app: backend
@@ -45,7 +52,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: backend-service
+      app: backend
   endpoints:
   - path: /metrics
     interval: 20s

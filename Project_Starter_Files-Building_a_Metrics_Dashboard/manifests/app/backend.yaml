@@ -6,7 +6,10 @@ metadata:
     sidecar.jaegertracing.io/inject: "true"
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
-    prometheus.io/port: backendport
+    prometheus.io/port: backendport    
+  labels:
+    name: backend
+    release: prometheus
 spec:
   replicas: 3
   selector:
@@ -25,7 +28,9 @@ spec:
           - name: JAEGER_HOST
             value: simpletest-agent.observability.svc.cluster.local
         ports:
-        - containerPort: 8081
+          - name: backendport
+            containerPort: 8080
+            protocol: TCP
 ---
 apiVersion: v1
 kind: Service

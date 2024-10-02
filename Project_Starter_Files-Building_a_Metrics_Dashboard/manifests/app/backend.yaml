@@ -2,14 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  annotations:
-    sidecar.jaegertracing.io/inject: "true"
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /metrics
-    prometheus.io/port: backendport
   labels:
     name: backend
     release: prometheus
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
 spec:
   replicas: 1
   selector:
@@ -29,7 +26,7 @@ spec:
               value: simpletest-agent.observability.svc.cluster.local
           ports:
             - name: backendport
-              containerPort: 8080
+              containerPort: 8081
               protocol: TCP
 ---
 apiVersion: v1

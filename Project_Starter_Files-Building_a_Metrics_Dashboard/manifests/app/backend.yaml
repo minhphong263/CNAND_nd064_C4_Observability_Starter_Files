@@ -45,7 +45,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: backend
+      app: backend-service
   endpoints:
   - path: /metrics
     interval: 20s

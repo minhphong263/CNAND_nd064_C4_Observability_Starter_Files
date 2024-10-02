@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ngocnd10/frontend:latest
+          image: adhika28/frontend-app:v1
           imagePullPolicy: Always
           ports:
             - name: frontendport
@@ -45,6 +45,11 @@ kind: ServiceMonitor
 metadata:
   name: frontend
   namespace: monitoring
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: frontend
   labels:
     app: frontend
     release: prometheus

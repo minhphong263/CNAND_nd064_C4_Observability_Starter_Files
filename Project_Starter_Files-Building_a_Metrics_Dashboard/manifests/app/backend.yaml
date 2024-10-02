@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ngocnd10/backend:latest
+          image: adhika28/backend-app:v1
           imagePullPolicy: Always
           env:
             - name: JAEGER_HOST
@@ -56,6 +56,11 @@ metadata:
   labels:
     app: backend
     release: prometheus
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: backend
 spec:
   selector:
     matchLabels:

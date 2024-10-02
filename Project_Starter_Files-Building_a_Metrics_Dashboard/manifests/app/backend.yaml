@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-app
+  name: backend
   annotations:
     sidecar.jaegertracing.io/inject: "true"
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
-    prometheus.io/port: backendport    
+    prometheus.io/port: backendport
   labels:
     name: backend
     release: prometheus
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -21,29 +21,31 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        # We advise you to build, push and use your own image, instead of using instructor's image.      
-        image: phongvm/backend:latest        
-        env:
-          - name: JAEGER_HOST
-            value: simpletest-agent.observability.svc.cluster.local
-        ports:
-          - name: backendport
-            containerPort: 8080
-            protocol: TCP
+        - name: backend
+          image: ngocnd10/backend:latest
+          imagePullPolicy: Always
+          env:
+            - name: JAEGER_HOST
+              value: simpletest-agent.observability.svc.cluster.local
+          ports:
+            - name: backendport
+              containerPort: 8080
+              protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend
   labels:
     app: backend
 spec:
   selector:
     app: backend
   ports:
-    - port: 8081
-      targetPort: 8080
+    - name: backend
+      protocol: TCP
+      port: 8081
+      targetPort: backendport
   type: LoadBalancer
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -59,8 +61,9 @@ spec:
     matchLabels:
       app: backend
   endpoints:
-  - path: /metrics
-    interval: 20s
+    - port: backend
+      path: /metrics
+      interval: 15s
   namespaceSelector:
     matchNames:
-    - default
+      - default

@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-app
+  name: frontend
   labels:
     name: frontend
     release: prometheus
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -16,24 +16,28 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        # We advise you to build, push and use your own image, instead of using instructor's image.
-        image: ghcr.io/jasonsmithio/myfrontend:v1
-        ports:
-        - containerPort: 8080
+        - name: frontend
+          image: ngocnd10/frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - name: frontendport
+              containerPort: 8080
+              protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: frontend
   labels:
     app: frontend
 spec:
   selector:
     app: frontend
   ports:
-    - port: 8080
-      targetPort: 8080
+    - name: frontend
+      protocol: TCP
+      port: 8080
+      targetPort: frontendport
   type: LoadBalancer
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -49,8 +53,9 @@ spec:
     matchLabels:
       app: frontend
   endpoints:
-  - path: /metrics
-    interval: 20s
+    - port: frontend
+      path: /metrics
+      interval: 15s
   namespaceSelector:
     matchNames:
-    - default
+      - default

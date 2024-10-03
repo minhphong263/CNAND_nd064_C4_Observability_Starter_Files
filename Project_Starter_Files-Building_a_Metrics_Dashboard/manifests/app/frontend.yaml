@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
-  labels:
-    name: frontend
-    release: prometheus
+  name: frontend-app
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
 spec:
   replicas: 1
   selector:
@@ -16,28 +15,26 @@ spec:
         app: frontend
     spec:
       containers:
-        - name: frontend
-          image: ngocnd10/frontend:latest
-          imagePullPolicy: Always
-          ports:
-            - name: frontendport
-              containerPort: 8080
-              protocol: TCP
+      - name: frontend
+        image: mmsaad85/udacity-observability-frontend:1.0.10
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: frontend-service
+  annotations:
+    prometheus.io/port: "9090"
+    prometheus.io/scrape: "true"
   labels:
     app: frontend
 spec:
   selector:
     app: frontend
   ports:
-    - name: frontend
-      protocol: TCP
-      port: 8080
-      targetPort: frontendport
+    - port: 8082
+      targetPort: 8080
   type: LoadBalancer
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -53,9 +50,8 @@ spec:
     matchLabels:
       app: frontend
   endpoints:
-    - port: frontend
-      path: /metrics
-      interval: 15s
+  - path: /metrics
+    interval: 20s
   namespaceSelector:
     matchNames:
-      - default
+    - default

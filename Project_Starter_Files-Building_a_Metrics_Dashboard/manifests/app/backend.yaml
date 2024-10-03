@@ -35,6 +35,9 @@ metadata:
   name: backend
   labels:
     app: backend
+  annotations:
+    prometheus.io/port: "9090"
+    prometheus.io/scrape: "true"
 spec:
   selector:
     app: backend

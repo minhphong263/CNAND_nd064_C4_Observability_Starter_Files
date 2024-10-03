@@ -32,6 +32,9 @@ metadata:
   name: frontend
   labels:
     app: frontend
+  annotations:
+    prometheus.io/port: "9090"
+    prometheus.io/scrape: "true"
 spec:
   selector:
     app: frontend

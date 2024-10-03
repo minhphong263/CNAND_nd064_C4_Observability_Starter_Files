@@ -5,8 +5,6 @@ metadata:
   labels:
     name: frontend
     release: prometheus
-  annotations:
-    sidecar.jaegertracing.io/inject: "true"
 spec:
   replicas: 1
   selector:
@@ -19,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: mmsaad85/udacity-observability-frontend:1.0.10
+          image: ngocnd10/frontend:latest
           imagePullPolicy: Always
           ports:
             - name: frontendport
@@ -32,9 +30,6 @@ metadata:
   name: frontend
   labels:
     app: frontend
-  annotations:
-    prometheus.io/port: "9090"
-    prometheus.io/scrape: "true"
 spec:
   selector:
     app: frontend
@@ -50,11 +45,6 @@ kind: ServiceMonitor
 metadata:
   name: frontend
   namespace: monitoring
-  annotations:
-    sidecar.jaegertracing.io/inject: "true"
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /metrics
-    prometheus.io/port: frontend
   labels:
     app: frontend
     release: prometheus

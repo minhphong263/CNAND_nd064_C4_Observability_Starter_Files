@@ -33,15 +33,13 @@ def init_tracer(service):
             "local_agent": {"reporting_host": JAEGER_HOST},
         },
         service_name=service,
-        validate=True,
-        metrics_factory=PrometheusMetricsFactory(service_name_label=service),
     )
 
     # this call also sets opentracing.tracer
     return config.initialize_tracer()
 
 
-tracer = init_tracer("backend")
+tracer = init_tracer("backend-service")
 
 flask_tracer = FlaskTracing(tracer, True, app)
 
@@ -55,13 +53,17 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def homepage():
-    return "Hello World"
+    with tracer.start_span('home-span') as span:
+        span.set_tag('home-tag', 'Sample from home')
+        return "Hello World"
 
 
 @app.route("/api")
 def my_api():
-    answer = "something"
-    return jsonify(repsonse=answer)
+    with tracer.start_span('api-span') as span:
+        span.set_tag('api-tag', 'Sample from api')
+        answer = "something"
+        return jsonify(repsonse=answer)
 
 
 @app.route("/star", methods=["POST"])

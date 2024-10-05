@@ -73,6 +73,7 @@ Affected Area: Backend Uptime SLO
 Severity: Hight
 
 Description: We see increasing in 400 errors in backend service while calling service endpoint /star, That's might be bug or configuration issue We should solve this issue since it's affecting our target SLI is 4xx/5xx less then 0.5%
+![image](https://github.com/user-attachments/assets/c60c2f98-b07b-4f14-bfd3-e11de330050d)
 
 
 ## Creating SLIs and SLOs

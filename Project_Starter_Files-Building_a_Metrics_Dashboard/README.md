@@ -21,9 +21,23 @@
 
 ## Describe SLO/SLI
 *TODO:* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.
+SLI stand for Service-Level Indicator is a specific metric used to measure the performance of a service.
+
+ - SLO of monthly uptime and request response time:
+   99.95% uptime in a month
+   95% of requests should respond within 300 milliseconds
+ - SLIs:
+   Service was down for 22 minutes in a month
+   95% of requests are processed within 250 milliseconds
+
 
 ## Creating SLI metrics.
 *TODO:* It is important to know why we want to measure certain metrics for our customer. Describe in detail 5 metrics to measure these SLIs. 
+1. Uptime Percentage: This metric indicates the proportion of time the service is operational and available to users over a defined period
+2. Average Response Time: This metric measures the average time taken to respond to user requests over a specified period.
+3. Error Rate: This metric tracks the percentage of failed requests (e.g., HTTP 500 errors) compared to total requests.
+4. 95th Percentile Response: his metric captures the response time below which 95% of requests fall. It helps identify outliers and ensures that the majority of users experience acceptable performance
+5. Latency Distribution: This metric provides a breakdown of response times across different percentiles (e.g., 50th, 75th, 90th, 95th, and 99th). It helps visualize how response times vary and identify trends over time.
 
 ## Create a Dashboard to measure our SLIs
 *TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.

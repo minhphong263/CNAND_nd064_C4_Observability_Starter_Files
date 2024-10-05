@@ -12,9 +12,11 @@
 ## Setup the Jaeger and Prometheus source
 *TODO:* Expose Grafana to the internet and then setup Prometheus as a data source. Provide a screenshot of the home page after logging into Grafana.
 
+![Screenshot 2024-10-01 222428](https://github.com/user-attachments/assets/df99ab52-ad1f-432d-b799-af3a7d5a474c)
+
 ## Create a Basic Dashboard
 *TODO:* Create a dashboard in Grafana that shows Prometheus as a source. Take a screenshot and include it here.
-![Screenshot 2024-10-01 222428](https://github.com/user-attachments/assets/df99ab52-ad1f-432d-b799-af3a7d5a474c)
+![image](https://github.com/user-attachments/assets/3819ca76-0831-4d7e-9346-b8eaaa554441)
 
 
 ## Describe SLO/SLI
@@ -30,30 +32,37 @@
 
 ## Tracing our Flask App
 *TODO:*  We will create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here. Also provide a (screenshot) sample Python file containing a trace and span code used to perform Jaeger traces on the backend service.
+![image](https://github.com/user-attachments/assets/5f657b1f-ca78-4085-a7ee-a791efcec156)
+
 
 ## Jaeger in Dashboards
 *TODO:* Now that the trace is running, let's add the metric to our current Grafana dashboard. Once this is completed, provide a screenshot of it here.
+![image](https://github.com/user-attachments/assets/7e591cd2-f16a-4e09-a608-028b1d2e3238)
+
 
 ## Report Error
 *TODO:* Using the template below, write a trouble ticket for the developers, to explain the errors that you are seeing (400, 500, latency) and to let them know the file that is causing the issue also include a screenshot of the tracer span to demonstrate how we can user a tracer to locate errors easily.
 
 TROUBLE TICKET
 
-Name:
+Name: Vo Minh Phong
 
-Date:
+Date: 5/10/2024
 
-Subject:
+Subject:  Can't add star
 
-Affected Area:
+Affected Area: Backend Uptime SLO
 
-Severity:
+Severity: Hight
 
-Description:
+Description: We see increasing in 400 errors in backend service while calling service endpoint /star, That's might be bug or configuration issue We should solve this issue since it's affecting our target SLI is 4xx/5xx less then 0.5%
 
 
 ## Creating SLIs and SLOs
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
+ - Availability
+ - Error Rate
+ - 
 
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.

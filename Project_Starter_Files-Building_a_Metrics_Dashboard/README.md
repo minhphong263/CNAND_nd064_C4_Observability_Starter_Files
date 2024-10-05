@@ -47,6 +47,8 @@ SLI stand for Service-Level Indicator is a specific metric used to measure the p
 ## Tracing our Flask App
 *TODO:*  We will create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here. Also provide a (screenshot) sample Python file containing a trace and span code used to perform Jaeger traces on the backend service.
 ![image](https://github.com/user-attachments/assets/5f657b1f-ca78-4085-a7ee-a791efcec156)
+![image](https://github.com/user-attachments/assets/c231adef-0600-4e81-9bde-ccc640b71672)
+
 
 
 ## Jaeger in Dashboards

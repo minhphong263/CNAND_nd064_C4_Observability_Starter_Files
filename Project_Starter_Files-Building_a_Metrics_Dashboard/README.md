@@ -41,7 +41,8 @@ SLI stand for Service-Level Indicator is a specific metric used to measure the p
 
 ## Create a Dashboard to measure our SLIs
 *TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
-![image](https://github.com/user-attachments/assets/7db7ff48-7668-4379-a261-ed647e0ace84)
+
+![image](https://github.com/user-attachments/assets/7d478f0b-18ac-4f3f-80f5-510678283429)
 
 
 

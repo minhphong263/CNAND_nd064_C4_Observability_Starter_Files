@@ -62,10 +62,31 @@ Description: We see increasing in 400 errors in backend service while calling se
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
  - Availability
  - Error Rate
- - 
+ - Uptime Percentage
+ - Successful Request Rate
 
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
+ * Uptime Percentage
+   - This KPI measures the percentage of time the application is operational and accessible to users
+ * Error Rate
+   - This KPI measures the percentage of requests that result in errors (e.g., 4xx and 5xx HTTP status codes). It provides insight into the reliability of the application.
+ * Average Response Time
+   - This KPI tracks the average time taken to respond to user requests. It can be measured in milliseconds and should align with your SLO for response times.
 
 ## Final Dashboard
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+
+ * Frontend Avg Response time
+   - This chart shows Average response time for frontend service, Which should not exceed 200 ms per-second
+ * Backend Avg Response time
+   - This chart shows Average response time for backend service, Which should not exceed 200 ms per-second
+ * Application Memory usage
+   - Show Memory used by our front-end and back-end services
+ * CPU Usage
+   - Should CPU used by our front-end and back-end services
+ * Count Error
+   - Show number error of back-end services
+
+![image](https://github.com/user-attachments/assets/1aa58b7d-ee88-4b80-b40f-6db36d14ecbe)
+
